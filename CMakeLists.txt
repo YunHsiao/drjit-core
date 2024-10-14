@@ -89,7 +89,7 @@ if (DRJIT_ENABLE_OPTIX)
 endif()
 
 add_library(
-  drjit-core SHARED
+  drjit-core STATIC
   include/drjit-core/jit.h
   include/drjit-core/traits.h
   include/drjit-core/hash.h

@@ -263,7 +263,7 @@ void jitc_shutdown(int light) {
     thread_state_llvm = nullptr;
     thread_state_cuda = nullptr;
 
-    if (std::max(state.log_level_stderr, state.log_level_callback) >= LogLevel::Warn) {
+    if (std::max(state.log_level_stderr, state.log_level_callback) >= DrJitLogLevel::Warn) {
         size_t n_leaked = state.variables.size() - state.unused_variables.size() - 1;
 
         if (n_leaked > 0) {

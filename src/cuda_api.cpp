@@ -138,7 +138,7 @@ bool jitc_cuda_api_init() {
 
     if (symbol) {
         jitc_cuda_api_shutdown();
-        jitc_log(LogLevel::Warn,
+        jitc_log(DrJitLogLevel::Warn,
                 "jit_cuda_api_init(): could not find symbol \"%s\" -- disabling "
                 "CUDA backend!", symbol);
         return false;

@@ -8,14 +8,14 @@
 
 using namespace drjit;
 
-static constexpr LogLevel Error = LogLevel::Error;
-static constexpr LogLevel Warn  = LogLevel::Warn;
-static constexpr LogLevel Info  = LogLevel::Info;
-static constexpr LogLevel Debug = LogLevel::Debug;
-static constexpr LogLevel Trace = LogLevel::Trace;
+static constexpr DrJitLogLevel Error = DrJitLogLevel::Error;
+static constexpr DrJitLogLevel Warn  = DrJitLogLevel::Warn;
+static constexpr DrJitLogLevel Info  = DrJitLogLevel::Info;
+static constexpr DrJitLogLevel Debug = DrJitLogLevel::Debug;
+static constexpr DrJitLogLevel Trace = DrJitLogLevel::Trace;
 
 extern int test_register(const char *name, void (*func)(), const char *flags = nullptr);
-extern "C" void log_level_callback(LogLevel cb, const char *msg);
+extern "C" void log_level_callback(DrJitLogLevel cb, const char *msg);
 
 using FloatC  = CUDAArray<float>;
 using Int32C  = CUDAArray<int32_t>;
@@ -116,7 +116,7 @@ using HalfL   = LLVMArray<drjit::half>;
             "does not support the requested type of atomic reduction") == NULL)\
             throw err;                                                         \
                                                                                \
-        jit_log(LogLevel::Warn, "Skipping test! %s", err.what());              \
+        jit_log(DrJitLogLevel::Warn, "Skipping test! %s", err.what());              \
         return;                                                                \
     }                                                                          \
 
@@ -129,7 +129,7 @@ using HalfL   = LLVMArray<drjit::half>;
 /// RAII helper for temporarily decreasing the log level
 struct scoped_set_log_level {
 public:
-    scoped_set_log_level(LogLevel level) {
+    scoped_set_log_level(DrJitLogLevel level) {
         m_cb_level = jit_log_level_callback();
         m_stderr_level = jit_log_level_stderr();
         jit_set_log_level_callback(level < m_cb_level ? level : m_cb_level,
@@ -144,7 +144,7 @@ public:
     }
 
 private:
-    LogLevel m_cb_level;
-    LogLevel m_stderr_level;
+    DrJitLogLevel m_cb_level;
+    DrJitLogLevel m_stderr_level;
 };
 

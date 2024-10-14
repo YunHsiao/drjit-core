@@ -30,7 +30,7 @@ struct Test {
 static std::vector<Test> *tests = nullptr;
 std::string log_value;
 
-extern "C" void log_level_callback(LogLevel, const char *msg) {
+extern "C" void log_level_callback(DrJitLogLevel, const char *msg) {
     log_value += msg;
     log_value += '\n';
 }
@@ -285,7 +285,7 @@ int main(int argc, char **argv) {
     mkdir(binary_path, 0777);
 #endif
 
-    int log_level_stderr = (int) LogLevel::Warn;
+    int log_level_stderr = (int) DrJitLogLevel::Warn;
     bool test_cuda = true, test_optix = true, test_llvm = true,
          check_test_files = false, write_ref = false, help = false;
     for (int i = 1; i < argc; ++i) {
@@ -294,7 +294,7 @@ int main(int argc, char **argv) {
         } else if (strcmp(argv[i], "-w") == 0) {
             write_ref = true;
         } else if (strcmp(argv[i], "-v") == 0) {
-            log_level_stderr = std::max((int) LogLevel::Info, log_level_stderr + 1);
+            log_level_stderr = std::max((int) DrJitLogLevel::Info, log_level_stderr + 1);
         } else if (strcmp(argv[i], "-c") == 0) {
             test_llvm = false;
             test_optix = false;
@@ -327,11 +327,11 @@ int main(int argc, char **argv) {
     }
 
     try {
-        jit_set_log_level_stderr((LogLevel) log_level_stderr);
+        jit_set_log_level_stderr((DrJitLogLevel) log_level_stderr);
         jit_init((test_llvm ? (uint32_t) JitBackend::LLVM : 0) |
                  ((test_cuda || test_optix) ? (uint32_t) JitBackend::CUDA : 0));
         if (check_test_files)
-            jit_set_log_level_callback(LogLevel::Trace, log_level_callback);
+            jit_set_log_level_callback(DrJitLogLevel::Trace, log_level_callback);
         fprintf(stdout, "\n");
 
         test_cuda &= (bool) jit_has_backend(JitBackend::CUDA);

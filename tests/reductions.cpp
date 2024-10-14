@@ -4,7 +4,7 @@
 TEST_BOTH_FLOAT_AGNOSTIC(01_all_any) {
     using Bool = Array<bool>;
 
-    scoped_set_log_level ssll(LogLevel::Info);
+    scoped_set_log_level ssll(DrJitLogLevel::Info);
     for (uint32_t i = 0; i < 100; ++i) {
         uint32_t size = 23*i*i*i + 1;
 
@@ -34,7 +34,7 @@ TEST_BOTH_FLOAT_AGNOSTIC(01_all_any) {
 }
 
 TEST_BOTH_FLOAT_AGNOSTIC(02_prefix_sum_exc_u32) {
-    scoped_set_log_level ssll(LogLevel::Info);
+    scoped_set_log_level ssll(DrJitLogLevel::Info);
     for (uint32_t i = 0; i < 100; ++i) {
         uint32_t size = 23*i*i*i + 1;
 
@@ -56,7 +56,7 @@ TEST_BOTH_FLOAT_AGNOSTIC(02_prefix_sum_exc_u32) {
 }
 
 TEST_BOTH_FLOAT_AGNOSTIC(03_prefix_sum_inc_u32) {
-    scoped_set_log_level ssll(LogLevel::Info);
+    scoped_set_log_level ssll(DrJitLogLevel::Info);
     for (uint32_t i = 0; i < 100; ++i) {
         uint32_t size = 23*i*i*i + 1;
 
@@ -78,7 +78,7 @@ TEST_BOTH_FLOAT_AGNOSTIC(03_prefix_sum_inc_u32) {
 }
 
 TEST_BOTH_FP32(04_prefix_sum_exc_f32) {
-    scoped_set_log_level ssll(LogLevel::Info);
+    scoped_set_log_level ssll(DrJitLogLevel::Info);
     for (uint32_t i = 0; i < 80; ++i) {
         uint32_t size = 23*i*i*i + 1;
 
@@ -108,7 +108,7 @@ TEST_BOTH_FP32(05_prefix_sum_inc_f32) {
 
 TEST_BOTH_FLOAT_AGNOSTIC(06_prefix_sum_exc_u64) {
     using UInt64 = typename UInt32::template ReplaceValue<uint64_t>;
-    scoped_set_log_level ssll(LogLevel::Info);
+    scoped_set_log_level ssll(DrJitLogLevel::Info);
     for (uint32_t i = 0; i < 100; ++i) {
         uint32_t size = 23*i*i*i + 1;
 
@@ -132,7 +132,7 @@ TEST_BOTH_FLOAT_AGNOSTIC(06_prefix_sum_exc_u64) {
 
 TEST_BOTH_FLOAT_AGNOSTIC(07_prefix_sum_inc_u64) {
     using UInt64 = typename UInt32::template ReplaceValue<uint64_t>;
-    scoped_set_log_level ssll(LogLevel::Info);
+    scoped_set_log_level ssll(DrJitLogLevel::Info);
     for (uint32_t i = 0; i < 100; ++i) {
         uint32_t size = 23*i*i*i + 1;
 
@@ -156,7 +156,7 @@ TEST_BOTH_FLOAT_AGNOSTIC(07_prefix_sum_inc_u64) {
 
 TEST_BOTH_FLOAT_AGNOSTIC(08_prefix_sum_exc_f64) {
     using Double = typename Float::template ReplaceValue<double>;
-    scoped_set_log_level ssll(LogLevel::Info);
+    scoped_set_log_level ssll(DrJitLogLevel::Info);
     for (uint32_t i = 0; i < 100; ++i) {
         uint32_t size = 23*i*i*i + 1;
 
@@ -174,7 +174,7 @@ TEST_BOTH_FLOAT_AGNOSTIC(08_prefix_sum_exc_f64) {
 
 TEST_BOTH_FLOAT_AGNOSTIC(09_prefix_sum_inc_f64) {
     using Double = typename Float::template ReplaceValue<double>;
-    scoped_set_log_level ssll(LogLevel::Info);
+    scoped_set_log_level ssll(DrJitLogLevel::Info);
     for (uint32_t i = 0; i < 100; ++i) {
         uint32_t size = 23*i*i*i + 1;
 
@@ -192,13 +192,13 @@ TEST_BOTH_FLOAT_AGNOSTIC(09_prefix_sum_inc_f64) {
 
 
 TEST_BOTH(10_compress) {
-    scoped_set_log_level ssll(LogLevel::Info);
+    scoped_set_log_level ssll(DrJitLogLevel::Info);
     for (uint32_t i = 0; i < 30; ++i) {
         uint32_t size = 23*i*i*i + 1;
         for (uint32_t j = 0; j <= i; ++j) {
             uint32_t n_ones = 23*j*j*j + 1;
 
-            jit_log(LogLevel::Info, "===== size=%u, ones=%u =====", size, n_ones);
+            jit_log(DrJitLogLevel::Info, "===== size=%u, ones=%u =====", size, n_ones);
             uint8_t *data      = (uint8_t *) jit_malloc(AllocType::Host, size);
             uint32_t *perm     = (uint32_t *) jit_malloc(Float::Backend == JitBackend::CUDA ? AllocType::Device :
                                                                           AllocType::Host,
@@ -235,14 +235,14 @@ TEST_BOTH(10_compress) {
 }
 
 TEST_BOTH(11_mkperm) {
-    scoped_set_log_level ssll(LogLevel::Info);
+    scoped_set_log_level ssll(DrJitLogLevel::Info);
     srand(0);
     for (uint32_t i = 0; i < 30; ++i) {
         uint32_t size = 23*i*i*i + 1;
         for (uint32_t j = 0; j <= i; ++j) {
             uint32_t n_buckets = 23*j*j*j + 1;
 
-            jit_log(LogLevel::Info, "===== size=%u, buckets=%u =====", size, n_buckets);
+            jit_log(DrJitLogLevel::Info, "===== size=%u, buckets=%u =====", size, n_buckets);
             uint32_t *data    = (uint32_t *) jit_malloc(AllocType::Host, size * sizeof(uint32_t)),
                      *perm    = (uint32_t *) jit_malloc(Float::Backend == JitBackend::CUDA ? AllocType::Device :
                                                                                              AllocType::Host,

@@ -390,7 +390,7 @@ TEST_BOTH(03_devirtualize) {
             jit_set_flag(JitFlag::OptimizeCalls, i);
             uint32_t scope = jit_scope(Backend);
 
-            scoped_set_log_level x((LogLevel) 10);
+            scoped_set_log_level x((DrJitLogLevel) 10);
 
             Mask call_mask = Mask::steal(jit_var_bool(Backend, true));
 

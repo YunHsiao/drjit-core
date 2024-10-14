@@ -390,7 +390,7 @@ bool jitc_kernel_write(const char *source, uint32_t source_size,
     }
 
     bool log = std::max(state.log_level_stderr,
-                        state.log_level_callback) >= LogLevel::Trace;
+                        state.log_level_callback) >= DrJitLogLevel::Trace;
     if (success && log)
         jitc_trace("jit_kernel_write(\"%s\"): compressed %s to %s", filename,
                   std::string(jitc_mem_string(size_t(source_size) + kernel.size)).c_str(),

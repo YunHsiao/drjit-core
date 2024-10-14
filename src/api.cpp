@@ -105,28 +105,28 @@ uint32_t jit_new_scope(JitBackend backend) {
     return jitc_new_scope(backend);
 }
 
-void jit_set_log_level_stderr(LogLevel level) {
+void jit_set_log_level_stderr(DrJitLogLevel level) {
     /// Allow changing this variable without acquiring a lock
     state.log_level_stderr = level;
 }
 
-LogLevel jit_log_level_stderr() {
+DrJitLogLevel jit_log_level_stderr() {
     /// Allow reading this variable without acquiring a lock
     return state.log_level_stderr;
 }
 
-void jit_set_log_level_callback(LogLevel level, LogCallback callback) {
+void jit_set_log_level_callback(DrJitLogLevel level, LogCallback callback) {
     lock_guard guard(state.lock);
     state.log_level_callback = callback ? level : Disable;
     state.log_callback = callback;
 }
 
-LogLevel jit_log_level_callback() {
+DrJitLogLevel jit_log_level_callback() {
     lock_guard guard(state.lock);
     return state.log_level_callback;
 }
 
-void jit_log(LogLevel level, const char* fmt, ...) {
+void jit_log(DrJitLogLevel level, const char* fmt, ...) {
     lock_guard guard(state.lock);
     va_list args;
     va_start(args, fmt);

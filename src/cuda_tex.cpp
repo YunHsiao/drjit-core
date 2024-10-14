@@ -221,7 +221,7 @@ void *jitc_cuda_tex_create(size_t ndim, const size_t *shape, size_t n_channels,
         );
     }
 
-    jitc_log(LogLevel::Debug, "jitc_cuda_tex_create(): " DRJIT_PTR,
+    jitc_log(DrJitLogLevel::Debug, "jitc_cuda_tex_create(): " DRJIT_PTR,
              (uintptr_t) texture);
 
     return (void *) texture;
@@ -614,7 +614,7 @@ void jitc_cuda_tex_destroy(void *texture_handle) {
     if (!texture_handle)
         return;
 
-    jitc_log(LogLevel::Debug, "jitc_cuda_tex_destroy(" DRJIT_PTR ")",
+    jitc_log(DrJitLogLevel::Debug, "jitc_cuda_tex_destroy(" DRJIT_PTR ")",
              (uintptr_t) texture_handle);
 
     DrJitCudaTexture *texture = (DrJitCudaTexture *) texture_handle;

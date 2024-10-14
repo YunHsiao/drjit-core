@@ -258,11 +258,11 @@ extern JIT_EXPORT uint32_t jit_llvm_block_size();
 // ====================================================================
 
 #if defined(__cplusplus)
-enum class LogLevel : uint32_t {
+enum class DrJitLogLevel : uint32_t {
     Disable, Error, Warn, Info, InfoSym, Debug, Trace
 };
 #else
-enum LogLevel {
+enum DrJitLogLevel {
     LogLevelDisable, LogLevelError, LogLevelWarn, LogLevelInfo,
     LogLevelInfoSym, LogLevelDebug, LogLevelTrace
 };
@@ -277,10 +277,10 @@ enum LogLevel {
  * via a callback in \ref jit_set_log_level_callback(). Both destinations can also
  * be enabled simultaneously, potentially using different log levels.
  */
-extern JIT_EXPORT void jit_set_log_level_stderr(JIT_ENUM LogLevel level);
+extern JIT_EXPORT void jit_set_log_level_stderr(JIT_ENUM DrJitLogLevel level);
 
 /// Return the currently set minimum log level for output to \c stderr
-extern JIT_EXPORT JIT_ENUM LogLevel jit_log_level_stderr();
+extern JIT_EXPORT JIT_ENUM DrJitLogLevel jit_log_level_stderr();
 
 
 /**
@@ -290,15 +290,15 @@ extern JIT_EXPORT JIT_ENUM LogLevel jit_log_level_stderr();
  * invoked with the contents of library log messages, whose severity matches or
  * exceeds the specified \c level.
  */
-typedef void (*LogCallback)(JIT_ENUM LogLevel, const char *);
-extern JIT_EXPORT void jit_set_log_level_callback(JIT_ENUM LogLevel level,
+typedef void (*LogCallback)(JIT_ENUM DrJitLogLevel, const char *);
+extern JIT_EXPORT void jit_set_log_level_callback(JIT_ENUM DrJitLogLevel level,
                                                   LogCallback callback);
 
 /// Return the currently set minimum log level for output to a callback
-extern JIT_EXPORT JIT_ENUM LogLevel jit_log_level_callback();
+extern JIT_EXPORT JIT_ENUM DrJitLogLevel jit_log_level_callback();
 
 /// Print a log message with the specified log level and message
-extern JIT_EXPORT void jit_log(JIT_ENUM LogLevel level, const char* fmt, ...);
+extern JIT_EXPORT void jit_log(JIT_ENUM DrJitLogLevel level, const char* fmt, ...);
 
 /// Raise an exception message with the specified message
 extern JIT_EXPORT void jit_raise(const char* fmt, ...) JIT_NORETURN_FORMAT;

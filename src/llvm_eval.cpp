@@ -87,7 +87,7 @@ static void jitc_llvm_render_trace(const Variable *v,
 
 void jitc_llvm_assemble(ThreadState *ts, ScheduledGroup group) {
     bool print_labels = std::max(state.log_level_stderr,
-                                 state.log_level_callback) >= LogLevel::Trace ||
+                                 state.log_level_callback) >= DrJitLogLevel::Trace ||
                         (jitc_flags() & (uint32_t) JitFlag::PrintIR);
 
     fmt("define void @drjit_^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^(i64 %start, i64 "
@@ -296,7 +296,7 @@ void jitc_llvm_assemble(ThreadState *ts, ScheduledGroup group) {
 
 void jitc_llvm_assemble_func(const CallData *call, uint32_t inst) {
     bool print_labels = std::max(state.log_level_stderr,
-                                 state.log_level_callback) >= LogLevel::Trace ||
+                                 state.log_level_callback) >= DrJitLogLevel::Trace ||
                         (jitc_flags() & (uint32_t) JitFlag::PrintIR);
     uint32_t width = jitc_llvm_vector_width, callables_local = callable_count;
     fmt("define fastcc void @func_^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^(<$w x i1> %mask");

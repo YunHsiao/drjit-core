@@ -14,9 +14,9 @@
 
 #if defined(_MSC_VER)
 #  if defined(DRJIT_BUILD)
-#    define JIT_EXPORT    __declspec(dllexport)
+#    define JIT_EXPORT
 #  else
-#    define JIT_EXPORT    __declspec(dllimport)
+#    define JIT_EXPORT
 #  endif
 #  define JIT_MALLOC
 #  define JIT_INLINE    __forceinline

@@ -794,10 +794,10 @@ struct State {
     Lock eval_lock;
 
     /// Log level (stderr)
-    LogLevel log_level_stderr = LogLevel::Info;
+    DrJitLogLevel log_level_stderr = DrJitLogLevel::Info;
 
     /// Log level (callback)
-    LogLevel log_level_callback = LogLevel::Disable;
+    DrJitLogLevel log_level_callback = DrJitLogLevel::Disable;
 
     /// Callback for log messages
     LogCallback log_callback = nullptr;

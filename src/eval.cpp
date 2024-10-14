@@ -389,7 +389,7 @@ void jitc_assemble(ThreadState *ts, ScheduledGroup group) {
     }
 
     bool trace = std::max(state.log_level_stderr, state.log_level_callback) >=
-                 LogLevel::Trace;
+                 DrJitLogLevel::Trace;
 
     if (unlikely(trace)) {
         buffer.clear();
@@ -444,7 +444,7 @@ void jitc_assemble(ThreadState *ts, ScheduledGroup group) {
     if (unlikely(trace || (jitc_flags() & (uint32_t) JitFlag::PrintIR))) {
         buffer.put('\n');
         if (state.log_callback)
-            state.log_callback(LogLevel::Info, buffer.get());
+            state.log_callback(DrJitLogLevel::Info, buffer.get());
         else
             fputs(buffer.get(), stderr);
         buffer.rewind_to(buffer.size() - 1);

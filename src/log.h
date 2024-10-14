@@ -13,13 +13,13 @@
 #include <stdarg.h>
 #include "common.h"
 
-static constexpr LogLevel Disable = LogLevel::Disable;
-static constexpr LogLevel Error   = LogLevel::Error;
-static constexpr LogLevel Warn    = LogLevel::Warn;
-static constexpr LogLevel Info    = LogLevel::Info;
-static constexpr LogLevel InfoSym = LogLevel::InfoSym;
-static constexpr LogLevel Debug   = LogLevel::Debug;
-static constexpr LogLevel Trace   = LogLevel::Trace;
+static constexpr DrJitLogLevel Disable = DrJitLogLevel::Disable;
+static constexpr DrJitLogLevel Error   = DrJitLogLevel::Error;
+static constexpr DrJitLogLevel Warn    = DrJitLogLevel::Warn;
+static constexpr DrJitLogLevel Info    = DrJitLogLevel::Info;
+static constexpr DrJitLogLevel InfoSym = DrJitLogLevel::InfoSym;
+static constexpr DrJitLogLevel Debug   = DrJitLogLevel::Debug;
+static constexpr DrJitLogLevel Trace   = DrJitLogLevel::Trace;
 
 #if defined(NDEBUG)
 #  define jitc_trace(...) do { } while (0)
@@ -36,10 +36,10 @@ static constexpr LogLevel Trace   = LogLevel::Trace;
 #if defined(__GNUC__)
     __attribute__((__format__ (__printf__, 2, 3)))
 #endif
-extern void jitc_log(LogLevel level, const char* fmt, ...);
+extern void jitc_log(DrJitLogLevel level, const char* fmt, ...);
 
 /// Print a log message with the specified log level and message
-extern void jitc_vlog(LogLevel level, const char* fmt, va_list args);
+extern void jitc_vlog(DrJitLogLevel level, const char* fmt, va_list args);
 
 /// Raise a std::runtime_error with the given message
 #if defined(__GNUC__)

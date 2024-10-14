@@ -141,7 +141,7 @@ bool jitc_cuda_init() {
     int device_count = 0;
     cuda_check(cuDeviceGetCount(&device_count));
     if (device_count == 0) {
-        jitc_log(LogLevel::Warn,
+        jitc_log(DrJitLogLevel::Warn,
                  "jit_cuda_init(): No devices found -- disabling CUDA backend!");
         return false;
     }
