@@ -378,7 +378,7 @@ JIT_NOINLINE void jitc_var_free(uint32_t index, Variable *v) noexcept {
 
 /// Access a variable by ID, terminate with an error if it doesn't exist
 Variable *jitc_var(uint32_t index) {
-    std::vector<Variable> &variables = state.variables;
+    auto &variables = state.variables;
     Variable *v = variables.data() + index;
 
     if (unlikely(index == 0 || index >= variables.size() ||
@@ -390,7 +390,7 @@ Variable *jitc_var(uint32_t index) {
 
 /// Access a variable through a weak reference. May return ``nullptr``
 Variable *jitc_var(WeakRef ref) {
-    std::vector<Variable> &variables = state.variables;
+    auto &variables = state.variables;
     if (unlikely(ref.index >= variables.size()))
         jitc_fail("jit_var(r%u): unknown variable!", ref.index);
 

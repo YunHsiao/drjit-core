@@ -491,7 +491,7 @@ void jitc_sync_device() {
     }
 
     if (thread_state_llvm) {
-        std::vector<ThreadState *> tss = state.tss;
+        auto tss = state.tss;
         // Release lock while synchronizing */
         for (ThreadState *ts_2 : tss) {
             if (ts_2->backend == JitBackend::LLVM)
@@ -502,7 +502,7 @@ void jitc_sync_device() {
 
 /// Wait for all computation on *all devices* to finish
 void jitc_sync_all_devices() {
-    std::vector<ThreadState *> tss = state.tss;
+    auto tss = state.tss;
     for (ThreadState *ts : tss)
         jitc_sync_thread(ts);
 }

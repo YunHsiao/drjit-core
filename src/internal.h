@@ -771,7 +771,7 @@ struct State {
     Lock alloc_free_lock;
 
     /// A flat list of variable data structures, including unused one
-    std::vector<Variable> variables;
+    drjit::vector<Variable> variables;
 
     /// A priority queue of indices into 'variables' that are currently unused
     UnusedPQ unused_variables;
@@ -779,11 +779,11 @@ struct State {
     /// Maps from a key characterizing a variable to its index
     LVNMap lvn_map;
 
-    /// A flast list of variable VariableExtra data structures (see its
+    /// A flat list of variable VariableExtra data structures (see its
     /// definition for documentation). Includes unused ones.
-    std::vector<VariableExtra> extra;
+    drjit::vector<VariableExtra> extra;
 
-    // A priority queu of indices into 'extra' that are currently unused
+    // A priority queue of indices into 'extra' that are currently unused
     UnusedPQ unused_extra;
 
     /// Counter to create variable scopes that enforce a variable ordering
@@ -806,10 +806,10 @@ struct State {
     uint32_t backends = 0;
 
     /// Available devices and their CUDA IDs
-    std::vector<Device> devices;
+    drjit::vector<Device> devices;
 
     /// State associated with each DrJit thread
-    std::vector<ThreadState *> tss;
+    drjit::vector<ThreadState *> tss;
 
     /// Map of currently allocated memory regions
     AllocUsedMap alloc_used;

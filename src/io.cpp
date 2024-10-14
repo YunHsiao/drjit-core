@@ -453,7 +453,7 @@ void jitc_kernel_free(int device_id, const Kernel &kernel) {
             jitc_fail("jit_kernel_free(): VirtualFree() failed!");
 #endif
     } else {
-        const Device &device = state.devices.at(device_id);
+        const Device &device = state.devices[device_id];
         scoped_set_context guard(device.context);
         if (kernel.size) {
             cuda_check(cuModuleUnload(kernel.cuda.mod));

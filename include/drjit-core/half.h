@@ -85,7 +85,7 @@ private:
     }
 
     static half sqrt(half h) {
-        #if defined(__aarch64__)
+        #if defined(__aarch64__) && defined(vsqrth_f16)
             return from_binary(
                 bitcast<uint16_t>(vsqrth_f16(bitcast<__fp16>(h.value))));
         #elif defined(__GNUC__)
